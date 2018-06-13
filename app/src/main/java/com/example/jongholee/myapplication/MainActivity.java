@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button click_btn;
     TextView displays_textView;
     EditText input_editText;
@@ -21,19 +21,20 @@ public class MainActivity extends AppCompatActivity {
         displays_textView = findViewById(R.id.display_textview);
         input_editText = findViewById(R.id.input_editText);
 
-        click_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.display_textview:
-                        input_editText.setText(displays_textView.getText().toString());
-                        break;
+        click_btn.setOnClickListener(MainActivity.this);
+        displays_textView.setOnClickListener(MainActivity.this);
+    }
 
-                    case R.id.click_btn:
-                        displays_textView.setText(input_editText.getText().toString());
-                        break;
-                }
-            }
-        });
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.display_textview:
+                input_editText.setText(displays_textView.getText().toString());
+                break;
+
+            case R.id.click_btn:
+                displays_textView.setText(input_editText.getText().toString());
+                break;
+        }
     }
 }
